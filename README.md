@@ -37,5 +37,4 @@ The techniques shown here (dynamic API resolution, IAT evasion) are dual-use:
 they can be applied in **legitimate software engineering** and are also  
 commonly abused in **malware**.  
 
-⚠️ Do not use this code for malicious purposes. The intent is to study, learn,  
-and understand how these techniques work in practice.
+⚠️ Do not use this code for malicious purposes. The intent is to study, learn, and understand how these techniques work in practice.
