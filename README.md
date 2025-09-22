@@ -30,6 +30,18 @@ In real-world malware, obfuscation layers are often added to further conceal API
 
 ---
 
+## String Encryption (runtime XOR)
+
+This feature adds runtime XOR string encryption for sensitive literals (such as DLL names and API function names). Instead of storing them in plaintext, the strings are kept in the binary as XOR-encrypted byte arrays and decrypted only at runtime when needed.
+
+Key points:
+- Strings are encrypted with XOR at build time and only decrypted in memory when accessed.
+- Decrypted values exist in memory temporarily and can be erased after use.
+- Provides basic obfuscation against static analysis tools that scan for recognizable strings.
+- Lightweight and simple — no external dependencies, minimal runtime overhead.
+
+---
+
 ## Disclaimer
 
 This repository is for **educational and research purposes only**.  
