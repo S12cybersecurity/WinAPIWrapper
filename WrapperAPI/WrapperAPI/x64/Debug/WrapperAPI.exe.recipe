@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\s12\Documents\GitHub\Evasion\FunctionsImplementation\WrapperAPI\x64\Debug\WrapperAPI.exe</FullPath>
+      <FullPath>C:\Users\s12\Documents\GitHub\Evasion\WinAPIWrapper\WrapperAPI\x64\Debug\WrapperAPI.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />

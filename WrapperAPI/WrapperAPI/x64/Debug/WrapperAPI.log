@@ -1,3 +1,3 @@
 ﻿  WrapperAPI.cpp
 C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\include\string_view(12): warning STL4038: The contents of <string_view> are available only with C++17 or later.
-  WrapperAPI.vcxproj -> C:\Users\s12\Documents\GitHub\Evasion\FunctionsImplementation\WrapperAPI\x64\Debug\WrapperAPI.exe
+  WrapperAPI.vcxproj -> C:\Users\s12\Documents\GitHub\Evasion\WinAPIWrapper\WrapperAPI\x64\Debug\WrapperAPI.exe

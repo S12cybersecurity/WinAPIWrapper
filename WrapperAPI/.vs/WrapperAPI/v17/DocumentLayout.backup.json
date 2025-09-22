@@ -1,14 +1,14 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\s12\\Documents\\GitHub\\Evasion\\FunctionsImplementation\\WrapperAPI\\",
+  "WorkspaceRootPath": "C:\\Users\\s12\\Documents\\GitHub\\Evasion\\WinAPIWrapper\\WrapperAPI\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{17BDE3C7-1CF8-44B8-965D-FD10D8E74D4D}|WrapperAPI\\WrapperAPI.vcxproj|C:\\Users\\s12\\Documents\\GitHub\\Evasion\\FunctionsImplementation\\WrapperAPI\\WrapperAPI\\WrapperAPI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{17BDE3C7-1CF8-44B8-965D-FD10D8E74D4D}|WrapperAPI\\WrapperAPI.vcxproj|solutionrelative:WrapperAPI\\WrapperAPI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{17BDE3C7-1CF8-44B8-965D-FD10D8E74D4D}|WrapperAPI\\WrapperAPI.vcxproj|C:\\Users\\s12\\Documents\\GitHub\\Evasion\\WinAPIWrapper\\WrapperAPI\\WrapperAPI\\winapi_wrapper.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{17BDE3C7-1CF8-44B8-965D-FD10D8E74D4D}|WrapperAPI\\WrapperAPI.vcxproj|solutionrelative:WrapperAPI\\winapi_wrapper.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{17BDE3C7-1CF8-44B8-965D-FD10D8E74D4D}|WrapperAPI\\WrapperAPI.vcxproj|C:\\Users\\s12\\Documents\\GitHub\\Evasion\\FunctionsImplementation\\WrapperAPI\\WrapperAPI\\winapi_wrapper.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{17BDE3C7-1CF8-44B8-965D-FD10D8E74D4D}|WrapperAPI\\WrapperAPI.vcxproj|solutionrelative:WrapperAPI\\winapi_wrapper.hpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{17BDE3C7-1CF8-44B8-965D-FD10D8E74D4D}|WrapperAPI\\WrapperAPI.vcxproj|C:\\Users\\s12\\Documents\\GitHub\\Evasion\\WinAPIWrapper\\WrapperAPI\\WrapperAPI\\WrapperAPI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{17BDE3C7-1CF8-44B8-965D-FD10D8E74D4D}|WrapperAPI\\WrapperAPI.vcxproj|solutionrelative:WrapperAPI\\WrapperAPI.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,30 +18,30 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "WrapperAPI.cpp",
-              "DocumentMoniker": "C:\\Users\\s12\\Documents\\GitHub\\Evasion\\FunctionsImplementation\\WrapperAPI\\WrapperAPI\\WrapperAPI.cpp",
+              "DocumentMoniker": "C:\\Users\\s12\\Documents\\GitHub\\Evasion\\WinAPIWrapper\\WrapperAPI\\WrapperAPI\\WrapperAPI.cpp",
               "RelativeDocumentMoniker": "WrapperAPI\\WrapperAPI.cpp",
-              "ToolTip": "C:\\Users\\s12\\Documents\\GitHub\\Evasion\\FunctionsImplementation\\WrapperAPI\\WrapperAPI\\WrapperAPI.cpp",
+              "ToolTip": "C:\\Users\\s12\\Documents\\GitHub\\Evasion\\WinAPIWrapper\\WrapperAPI\\WrapperAPI\\WrapperAPI.cpp",
               "RelativeToolTip": "WrapperAPI\\WrapperAPI.cpp",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAAAIgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAGkAAAAAAAAAAAAiwHoAAABAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-09-10T18:33:07.368Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "winapi_wrapper.hpp",
-              "DocumentMoniker": "C:\\Users\\s12\\Documents\\GitHub\\Evasion\\FunctionsImplementation\\WrapperAPI\\WrapperAPI\\winapi_wrapper.hpp",
+              "DocumentMoniker": "C:\\Users\\s12\\Documents\\GitHub\\Evasion\\WinAPIWrapper\\WrapperAPI\\WrapperAPI\\winapi_wrapper.hpp",
               "RelativeDocumentMoniker": "WrapperAPI\\winapi_wrapper.hpp",
-              "ToolTip": "C:\\Users\\s12\\Documents\\GitHub\\Evasion\\FunctionsImplementation\\WrapperAPI\\WrapperAPI\\winapi_wrapper.hpp",
+              "ToolTip": "C:\\Users\\s12\\Documents\\GitHub\\Evasion\\WinAPIWrapper\\WrapperAPI\\WrapperAPI\\winapi_wrapper.hpp",
               "RelativeToolTip": "WrapperAPI\\winapi_wrapper.hpp",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAADgAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEsBAAAAAAAAAAASwFsBAABYAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2025-09-10T18:34:26.842Z",
               "EditorCaption": ""
