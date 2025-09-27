@@ -229,6 +229,38 @@ private:
 // =======================
 // (same as before)...
 
+// === DbgHelp: tipos públicos mínimos ===
+typedef enum _MINIDUMP_TYPE {
+    MiniDumpNormal = 0x00000000,
+    MiniDumpWithDataSegs = 0x00000001,
+    MiniDumpWithFullMemory = 0x00000002,
+    MiniDumpWithHandleData = 0x00000004,
+    MiniDumpFilterMemory = 0x00000008,
+    MiniDumpScanMemory = 0x00000010,
+    MiniDumpWithUnloadedModules = 0x00000020,
+    MiniDumpWithIndirectlyReferencedMemory = 0x00000040,
+    MiniDumpFilterModulePaths = 0x00000080,
+    MiniDumpWithProcessThreadData = 0x00000100,
+    MiniDumpWithPrivateReadWriteMemory = 0x00000200,
+    MiniDumpWithoutOptionalData = 0x00000400,
+    MiniDumpWithFullMemoryInfo = 0x00000800,
+    MiniDumpWithThreadInfo = 0x00001000,
+    MiniDumpWithCodeSegs = 0x00002000,
+    MiniDumpWithoutAuxiliaryState = 0x00004000,
+    MiniDumpWithFullAuxiliaryState = 0x00008000,
+    MiniDumpWithPrivateWriteCopyMemory = 0x00010000,
+    MiniDumpIgnoreInaccessibleMemory = 0x00020000,
+    MiniDumpWithTokenInformation = 0x00040000,
+    MiniDumpWithModuleHeaders = 0x00080000,
+    MiniDumpFilterTriage = 0x00100000,
+    MiniDumpWithAvxXStateContext = 0x00200000,
+    MiniDumpWithIptTrace = 0x00400000,
+    MiniDumpScanInaccessiblePartialPages = 0x00800000,
+    MiniDumpFilterWriteCombinedMemory,
+    MiniDumpValidTypeFlags = 0x01ffffff
+} MINIDUMP_TYPE;
+
+
 // KERNEL32
 using CreateFileW_t = HANDLE(WINAPI*)(LPCWSTR, DWORD, DWORD, LPSECURITY_ATTRIBUTES, DWORD, DWORD, HANDLE);
 using CloseHandle_t = BOOL(WINAPI*)(HANDLE);
@@ -335,6 +367,19 @@ using NtQuerySystemInformation_t = NTSTATUS(NTAPI*)(SYSTEM_INFORMATION_CLASS, PV
 using RtlNtStatusToDosError_t = ULONG(NTAPI*)(NTSTATUS);
 using RtlInitUnicodeString_t = VOID(NTAPI*)(PUNICODE_STRING, PCWSTR);
 using NtClose_t = NTSTATUS(NTAPI*)(HANDLE);
+
+
+// DBGHELP
+using MiniDumpWriteDump_t = BOOL(WINAPI*)(
+    HANDLE hProcess,
+    DWORD  ProcessId,
+    HANDLE hFile,
+    MINIDUMP_TYPE DumpType,
+    PVOID ExceptionParam,   // PMINIDUMP_EXCEPTION_INFORMATION (opcional)
+    PVOID UserStreamParam,  // PMINIDUMP_USER_STREAM_INFORMATION (opcional)
+    PVOID CallbackParam     // PMINIDUMP_CALLBACK_INFORMATION (opcional)
+    );
+
 
 // ============================================================================
 //  SECTION: pre-xored names (enc_* arrays) and their X instances
@@ -689,6 +734,13 @@ constexpr unsigned char enc_NtClose[] = {
     0xE4, 0xDE, 0xE9, 0xC6, 0xC5, 0xD9, 0xCF, 0x00
 }; DECL_XENC(NtClose);
 
+// dbghelp
+constexpr unsigned char enc_MiniDumpWriteDump[] = {
+    0xE7, 0xC3, 0xC4, 0xC3, 0xEE, 0xDF, 0xC7, 0xDA, 0xFD, 0xD8, 0xC3, 0xDE, 0xCF, 0xEE, 0xDF, 0xC7, 0xDA, 0x00
+};
+DECL_XENC(MiniDumpWriteDump);
+
+
 // ============================================================================
 //  Wrappers per module (use ENC_XOR(...) for names)
 // ============================================================================
@@ -918,6 +970,16 @@ struct NtDll {
     RtlInitUnicodeString_t       RtlInitUnicodeString = nullptr;
     NtClose_t                    NtClose = nullptr;
 };
+
+struct DbgHelp {
+    DbgHelp() : mod(L"DbgHelp.dll") { 
+        MiniDumpWriteDump = mod.get_xor<MiniDumpWriteDump_t>(ENC_XOR(MiniDumpWriteDump));
+    }
+
+    DynModule mod;
+    MiniDumpWriteDump_t MiniDumpWriteDump = nullptr;
+};
+
 
 // ============================================================================
 // End of file

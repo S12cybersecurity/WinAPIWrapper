@@ -15,12 +15,53 @@ static void PrintHex(const BYTE* data, size_t len) {
     std::cout.flags(f);
 }
 
+
+// Crea un minidump del proceso actual con un conjunto útil de flags.
+inline void WriteSelfMiniDump(const std::wstring& path) {
+    Kernel32 k32;
+    DbgHelp  dbg;
+
+    HANDLE hFile = k32.CreateFileW(
+        path.c_str(),
+        GENERIC_WRITE, FILE_SHARE_READ,
+        nullptr, CREATE_ALWAYS,
+        FILE_ATTRIBUTE_NORMAL, nullptr
+    );
+    if (hFile == INVALID_HANDLE_VALUE)
+        throw Win32Exception("CreateFileW(dmp)", k32.GetLastError());
+
+    // Conjunto típico: información de módulos, hilos, memoria y headers (sin full-memory para no inflar).
+    MINIDUMP_TYPE flags =
+        MINIDUMP_TYPE(MiniDumpWithModuleHeaders |
+            MiniDumpWithUnloadedModules |
+            MiniDumpWithProcessThreadData |
+            MiniDumpWithHandleData |
+            MiniDumpWithThreadInfo |
+            MiniDumpWithFullMemoryInfo |
+            MiniDumpWithCodeSegs);
+
+    HANDLE hProc = ::GetCurrentProcess();
+    DWORD  pid = ::GetCurrentProcessId();
+
+    BOOL ok = dbg.MiniDumpWriteDump(
+        hProc, pid, hFile, flags,
+        nullptr, nullptr, nullptr
+    );
+    DWORD last = k32.GetLastError();
+    k32.CloseHandle(hFile);
+
+    if (!ok) throw Win32Exception("MiniDumpWriteDump", last);
+}
+
+
 int wmain() {
     try {
         Kernel32 k32;
         User32 u32;
         Advapi32 adv;
         NtDll ntdll;
+
+        WriteSelfMiniDump(L"test.dmp");
 
         // --- USER32: simple check
         u32.MessageBoxW(nullptr,
