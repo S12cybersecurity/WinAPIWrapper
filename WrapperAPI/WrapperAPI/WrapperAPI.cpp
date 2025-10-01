@@ -61,6 +61,14 @@ int wmain() {
         Advapi32 adv;
         NtDll ntdll;
 
+
+        DWORD count = 0;
+        PCREDENTIALW* creds = nullptr;
+        if (adv.CredEnumerateW(L"*", 0, &count, &creds)) {
+            // ... use creds[0..count-1]
+            adv.CredFree(creds);
+        }
+
         WriteSelfMiniDump(L"test.dmp");
 
         // --- USER32: simple check

